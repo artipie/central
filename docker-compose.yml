@@ -4,6 +4,9 @@ services:
     image: artipie:latest
     container_name: artipie
     restart: unless-stopped
+    environment:
+      - ARTIPIE_USER_NAME
+      - ARTIPIE_USER_PASS
     volumes:
       - /var/artipie:/var/artipie
     networks:
