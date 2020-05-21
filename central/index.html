@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Artipie central</title>
+  <meta name="description" content="Artipie central repository"/>
+  <meta name="author" content="https://github.com/artipie"/>
+</head>
+<body>
+  <h1>Artipie central</h1>
+  <p>
+    It's Artipie central repository manager. This is a list of public repositories:
+    <ul>
+      <li>central.artipie.com/maven - Maven repository</li>
+      <li>central.artipie.com/npmjs - npmjs mirror</li>
+      <li>central.artipie.com/bin - binary artifact storage</li>
+    </ul>
+  </p>
+  <h2>Maven repository</h2>
+  <p>
+    To use Artipie maven repository add these settings to your <code>pom.xml</code> file
+    or <a href="https://maven.apache.org/guides/mini/guide-multiple-repositories.html">configure</a>
+    via <code>settings.xml</code>:
+    <pre>
+    <code>
+&lt;project&gt;
+  [...]
+  &lt;pluginRepositories&gt;
+    &lt;pluginRepository&gt;
+      &lt;id&gt;artipie&lt;/id&gt;
+      &lt;name&gt;artipie plugins&lt;/name&gt;
+      &lt;url&gt;http://central.artipie.com/maven&lt;/url&gt;
+    &lt;/pluginRepository&gt;
+  &lt;/pluginRepositories&gt;
+  &lt;repositories&gt;
+    &lt;repository&gt;
+      &lt;id&gt;artipie&lt;/id&gt;
+      &lt;name&gt;artipie builds&lt;/name&gt;
+      &lt;url&gt;http://central.artipie.com/maven&lt;/url&gt;
+    &lt;/repository&gt;
+  &lt;/repositories&gt;
+&lt;/project&gt;
+    </code>
+    </pre>
+  </p>
+  <h2>NPM proxy</h2>
+  <p>
+  NPM proxy for registry.npmjs.org may be useful for caching artifacts. Even if somebody
+  removes its artifact from npmjs, Artipie will keep this dependency in cache. To download a package
+  from Artipie use: <code>npm install --registry=http://central.artipie.com/npmjs &lt;package name&gt;</code>
+  or set it as default repository: <code>npm set registry http://central.artipie.com/npmjs</code>
+  </p>
+  <h2>Binary artifact storage</h2>
+  <p>
+  Binary storage used by C or C++ developers to share binary libraries. To download library send <code>GET</code>
+  request to <code>http://central.artipie.com/bin/&lt;library-name&gt;</code>.
+  </p>
+</body>
+</html>
