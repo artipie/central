@@ -5,8 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-#domains=(central.artipie.com www.central.artipie.com)
-domains=(ec2-18-188-223-13.us-east-2.compute.amazonaws.com www.ec2-18-188-223-13.us-east-2.compute.amazonaws.com)
+domains=(central.artipie.com www.central.artipie.com)
 rsa_key_size=4096
 data_path="./data/certbot"
 email=artem.lazarev@gmail.com"" # Adding a valid address is strongly recommended
