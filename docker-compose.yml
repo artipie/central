@@ -7,8 +7,21 @@ services:
     environment:
       - ARTIPIE_USER_NAME
       - ARTIPIE_USER_PASS
+      - ARTIPIE_SESSION_KEY
     volumes:
       - /var/artipie:/var/artipie
+      - ./artipie.yml:/etc/artipie.yml
+    networks:
+      - artipie-net
+  central-auth:
+    image: artipie/auth:local
+    container_name: central-auth
+    environment:
+      - OAUTH_CLIENT
+      - OAUTH_SECRET
+      - SESSION_KEY
+    volumes:
+      - /var/artipie/keys:/var/artipie/keys
     networks:
       - artipie-net
   nginx:
@@ -16,6 +29,7 @@ services:
     container_name: nginx
     depends_on:
       - artipie
+      - central-auth
     restart: unless-stopped
     networks:
       - artipie-net
@@ -24,7 +38,6 @@ services:
       - ${PWD}/nginx.conf:/etc/nginx/nginx.conf
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
-            
     ports:
       - "80:80"
       - "443:443"
