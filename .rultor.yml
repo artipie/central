@@ -11,6 +11,7 @@ deploy:
     - central-key
   script: |-
     eval $(ssh-agent)
+    chmod 400 ../central-key
     ssh-add ../central-key
     docker context create central.artipie.com --docker "host=ssh://artipie@central.artipie.com"
     docker context use central.artipie.com
