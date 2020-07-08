@@ -2,10 +2,10 @@
 assets:
   central-key: "g4s8/.rultor#assets/artipie/_artipie.central-cd"
 docker:
-  image: "g4s8/rultor:alpine3.10"
+  image: "g4s8/rultor:alpine3.11"
   as_root: true
 install:
-  - "apk --update --no-cache add openssh docker docker-compose"
+  - "apk --update --no-cache --no-progress add openssh docker docker-compose"
 deploy:
   sensitive:
     - central-key
