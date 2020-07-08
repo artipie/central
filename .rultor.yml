@@ -1,6 +1,7 @@
 ---
 assets:
   central-key: "g4s8/.rultor#assets/artipie/_artipie.central-cd"
+  env.sh: "g4s8/.rultor#assets/artipie/env.sh"
 docker:
   image: "g4s8/rultor:alpine3.11"
   as_root: true
@@ -13,6 +14,9 @@ deploy:
     eval $(ssh-agent)
     chmod 400 ../central-key
     ssh-add ../central-key
+    set +x
+    source ../env.sh
+    set -x
     docker context create central.artipie.com --docker "host=ssh://artipie@central.artipie.com"
     docker context use central.artipie.com
     docker-compose pull artipie
