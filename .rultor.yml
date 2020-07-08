@@ -1,0 +1,21 @@
+---
+assets:
+  central-key: "g4s8/.rultor#assets/artipie/_artipie.central-cd"
+docker:
+  image: alpine:3.11
+  as_root: true
+install:
+  - "apk --update --no-cache add openssh docker docker-compose"
+deploy:
+  sensitive:
+    - central-key
+  script: |-
+    eval $(ssh-agent)
+    ssh-add ../central-key
+    docker context create central.artipie.com --docker "host=ssh://artipie@central.artipie.com"
+    docker context use central.artipie.com
+    docker-compose pull artipie
+    docker-compose down
+    docker-compose up -d
+architect:
+  - "g4s8"
