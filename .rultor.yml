@@ -14,11 +14,13 @@ deploy:
     eval $(ssh-agent)
     chmod 400 ../central-key
     ssh-add ../central-key
+    scp nginx.con artipie@central.artipie.com:/home/artipie/central/nginx.conf
+    scp artipie.yml artipie@central.artipie.com:/home/artipie/central/artipie.yml
+    docker context create central.artipie.com --docker "host=ssh://artipie@central.artipie.com"
+    docker context use central.artipie.com
     set +x
     source ../env.sh
     set -x
-    docker context create central.artipie.com --docker "host=ssh://artipie@central.artipie.com"
-    docker context use central.artipie.com
     docker-compose pull artipie
     docker-compose down
     docker-compose up -d
