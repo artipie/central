@@ -10,7 +10,7 @@ services:
       - ARTIPIE_SESSION_KEY
     volumes:
       - /var/artipie:/var/artipie
-      - ${HOME}/artipie.yml:/etc/artipie.yml
+      - /home/artipie/central/artipie.yml:/etc/artipie.yml
     networks:
       - artipie-net
   central-auth:
@@ -34,10 +34,10 @@ services:
     networks:
       - artipie-net
     volumes:
-      - ${HOME}/central/www:/var/www
-      - ${HOME}/central/nginx.conf:/etc/nginx/nginx.conf
-      - ${HOME}/central/data/certbot/conf:/etc/letsencrypt
-      - ${HOME}/central/data/certbot/www:/var/www/certbot
+      - /home/artipie/central/www:/var/www
+      - /home/artipie/central/nginx.conf:/etc/nginx/nginx.conf
+      - /home/artipie/central/data/certbot/conf:/etc/letsencrypt
+      - /home/artipie/central/data/certbot/www:/var/www/certbot
     ports:
       - "80:80"
       - "443:443"
@@ -45,8 +45,8 @@ services:
     image: certbot/certbot
     restart: unless-stopped
     volumes:
-      - ${HOME}/central/data/certbot/conf:/etc/letsencrypt
-      - ${HOME}/central/data/certbot/www:/var/www/certbot
+      - /home/artipie/central/data/certbot/conf:/etc/letsencrypt
+      - /home/artipie/central/data/certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 networks:
   artipie-net:
