@@ -15,7 +15,7 @@ deploy:
     chmod 400 ../central-key
     ssh-add ../central-key
     echo "central.artipie.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBF1Gp8oOdXbutBD14uO0dQAHh82zTDdoIZ5awrG1M2gaC8BPZGVXbEFJj+LNu8lioKxnINn4eHRU3MvCHHCpx9E=" >> /etc/ssh/ssh_known_hosts
-    scp nginx.con artipie@central.artipie.com:/home/artipie/central/nginx.conf
+    scp nginx.conf artipie@central.artipie.com:/home/artipie/central/nginx.conf
     scp artipie.yml artipie@central.artipie.com:/home/artipie/central/artipie.yml
     docker context create central.artipie.com --docker "host=ssh://artipie@central.artipie.com"
     docker context use central.artipie.com
