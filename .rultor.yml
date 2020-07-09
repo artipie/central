@@ -26,6 +26,7 @@ deploy:
     set -x
     docker-compose --context central.artipie.com pull artipie
     docker-compose --context central.artipie.com down
+    docker-compose --context central.artipie.com rm -fsv
     docker-compose --context central.artipie.com up -d
 architect:
   - "g4s8"
