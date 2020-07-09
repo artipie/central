@@ -7,6 +7,8 @@ docker:
   as_root: true
 install:
   - "apk --update --no-cache --no-progress add openssh docker docker-compose"
+  - "pip3 install --upgrade pip"
+  - "pip3 install --upgrade docker-compose"
 deploy:
   sensitive:
     - central-key
@@ -22,8 +24,8 @@ deploy:
     set +x
     source ../env.sh
     set -x
-    docker-compose pull artipie
-    docker-compose down
-    docker-compose up -d
+    docker-compose --context central.artipie.com pull artipie
+    docker-compose --context central.artipie.com down
+    docker-compose --context central.artipie.com up -d
 architect:
   - "g4s8"
