@@ -47,7 +47,7 @@ func main() {
 		if fail(w, err) {
 			return
 		}
-		w.Header().Add("Location", fmt.Sprintf("/%s", usr))
+		w.Header().Add("Location", fmt.Sprintf("/dashboard/%s", usr))
 		http.SetCookie(w, &http.Cookie{Name: "session", Value: ses})
 		w.WriteHeader(http.StatusTemporaryRedirect)
 		w.Write([]byte("<!DOCTYPE HTML><html><body>Redirecting</body></html>"))
