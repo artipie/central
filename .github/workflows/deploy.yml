@@ -11,7 +11,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          REMOTE_PORT: 8080
           TARGET: ${{ secrets.REMOTE_TARGET }}
           EXCLUDE: ".github/, .gitignore"
         with:
