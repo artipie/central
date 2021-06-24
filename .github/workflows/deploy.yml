@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@2.2.11
+        uses: easingthemes/ssh-deploy@v2.2.11
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
