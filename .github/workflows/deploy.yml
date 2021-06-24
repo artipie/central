@@ -18,9 +18,10 @@ jobs:
           SSH_PRIVATE_KEY: "$SSH_PRIVATE_KEY"
           REMOTE_HOST: "$REMOTE_HOST"
           REMOTE_USER: "$REMOTE_USER"
-          REMOTE_PORT: ${{secrets.REMOTE_PORT}}
+          REMOTE_PORT: $REMOTE_PORT
           TARGET: "$TARGET"
           EXCLUDE: "$EXCLUDE"
+        run: echo "port $REMOTE_PORT"
       - name: Build, remove old container and up a new one
         env:
           SSH_REMOTE_USER: ${{ secrets.REMOTE_USER }}
