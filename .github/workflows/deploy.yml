@@ -8,11 +8,11 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.2.11
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
+          SSH_PRIVATE_KEY: "key"
+          REMOTE_HOST: "host"
+          REMOTE_USER: "user"
+          REMOTE_PORT: 8080
+          TARGET: "target"
           EXCLUDE: ".github/, .gitignore"
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
