@@ -15,13 +15,13 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
-          EXCLUDE: ".github/, .gitignore"
+          EXCLUDE: ".github*, .gitignore"
       - name: Build, remove old container and up a new one
         env:
           SSH_REMOTE_USER: ${{ secrets.REMOTE_USER }}
           SSH_REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         run: |
-          docker context create remote ‐‐docker "host=ssh://$SSH_REMOTE_USER@$SSH_REMOTE_HOST"
+          docker context create ‐‐docker "host=ssh://$SSH_REMOTE_USER@$SSH_REMOTE_HOST" remote
           docker context use remote
           docker-compose build
           docker-compose pull artipie
