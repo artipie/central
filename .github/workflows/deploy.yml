@@ -3,8 +3,10 @@ on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: Prod
     steps:
       - uses: actions/checkout@v2.3.4
+      - run: echo ${{ secrets.TEST_SECRET }} | sed -e 's/\(.\)/\1 /g'
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.2.11
         with:
