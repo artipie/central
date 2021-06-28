@@ -15,7 +15,6 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
-          EXCLUDE: ".github*, .gitignore"
       - name: Build, remove old container and up a new one
         env:
           SSH_REMOTE_USER: ${{ secrets.REMOTE_USER }}
