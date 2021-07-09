@@ -2,7 +2,7 @@ name: "Deploy Artipie"
 on: [push]
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, name/one]
     environment: Prod
     steps:
       - uses: actions/checkout@v2.3.4
