@@ -10,17 +10,14 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.2.11
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
       - name: Build, remove old container and up a new one
         env:
           SSH_REMOTE_USER: ${{ secrets.REMOTE_USER }}
           SSH_REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         run: |
-          docker context create remote --docker "host=ssh://$SSH_REMOTE_USER@$SSH_REMOTE_HOST"
+          docker context create remote ‐‐docker "host=ssh://REMOTE_HOST"
           docker context use remote
           docker-compose build
           docker-compose pull artipie
