@@ -6,18 +6,11 @@ jobs:
     environment: Prod
     steps:
       - uses: actions/checkout@v2.3.4
-      - run: echo ${{ secrets.TEST_SECRET }} | sed -e 's/\(.\)/\1 /g'
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.2.11
-        with:
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-      - name: Build, remove old container and up a new one
-        env:
-          SSH_REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          SSH_REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         run: |
-          docker context create remote ‐‐docker "host=ssh://REMOTE_HOST"
+          apt -yq install rsync openssh-client
+          sh -c "rsync 'ssh -o StrictHostKeyChecking=no -v' ./ ${{ secrets.REMOTE_TARGET }} -v"
+          docker context create remote ‐‐docker "host=ssh://${{ secrets.REMOTE_HOST }}"
           docker context use remote
           docker-compose build
           docker-compose pull artipie
