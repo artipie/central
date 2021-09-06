@@ -9,7 +9,7 @@ jobs:
       - name: Deploy to Server
         run: |
           apt -yq install rsync openssh-client
-          sh -c "rsync 'ssh -o StrictHostKeyChecking=no -v' ./ ${{ secrets.REMOTE_TARGET }} -v"
+          rsync -r -o StrictHostKeyChecking=no -v /home/runner/myw/_work/central/central/* ${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }} -v
           docker context create remote ‐‐docker "host=ssh://${{ secrets.REMOTE_HOST }}"
           docker context use remote
           docker-compose build
