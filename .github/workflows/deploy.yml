@@ -9,13 +9,18 @@ jobs:
       - name: Deploy to Server
         run: |
           rsync -r /home/runner/myw/_work/central/central/* ${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }} -v
-          echo "rsync passed successfully"
+          echo "----- rsync passed successfully -----"
           docker context rm remote -f
+          echo "----- remove context 'remote' -----"
           docker context create remote --docker "host=ssh://${{ secrets.REMOTE_HOST }}"
-          echo "context was created"
+          echo "----- context was created -----"
           docker context use remote
-          echo "used remote context"
+          echo "----- used remote context -----"
           docker-compose build
+          echo "----- built with docker-compose -----"
           docker-compose pull artipie
+          echo "----- pulled artipie -----"
           docker-compose down
+          echo "----- down successfully -----"
           docker-compose up -d
+          echo "----- up in detached mode -----"
