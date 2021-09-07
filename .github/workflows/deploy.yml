@@ -9,8 +9,8 @@ jobs:
       - name: Deploy to Server
         run: |
           rsync -r /home/runner/myw/_work/central/central/* ${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }} -v
-          echo "rsync was established"
-          docker context create remote ‐‐docker "host=ssh://${{ secrets.REMOTE_HOST }}"
+          echo "rsync passed successfully"
+          docker context create remote --docker "host=ssh://${{ secrets.REMOTE_HOST }}"
           echo "context was created"
           docker context use remote
           echo "used remote context"
