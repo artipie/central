@@ -16,7 +16,7 @@ jobs:
           echo "----- context was created -----"
           docker context use remote
           echo "----- used remote context -----"
-          docker-compose build
+          echo "https_proxy=http://localhost:3128;http_proxy=http://localhost:3128" > env_file && docker-compose build --verbose --env-file env_file
           echo "----- built with docker-compose -----"
           docker-compose pull artipie
           echo "----- pulled artipie -----"
