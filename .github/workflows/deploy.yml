@@ -16,13 +16,11 @@ jobs:
           echo "----- remove context 'remote' -----"
           docker context create remote --docker "host=ssh://${{ secrets.REMOTE_HOST }}"
           echo "----- context was created -----"
-          docker context use remote
-          echo "----- used remote context -----"
-          docker-compose build
+          docker-compose --context remote build
           echo "----- built with docker-compose -----"
-          docker-compose pull artipie
+          docker-compose --context remote pull artipie
           echo "----- pulled artipie -----"
-          docker-compose down
+          docker-compose --context remote down
           echo "----- down successfully -----"
-          docker-compose up -d
+          docker-compose --context remote up -d
           echo "----- up in detached mode -----"
