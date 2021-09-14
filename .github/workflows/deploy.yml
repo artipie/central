@@ -18,7 +18,7 @@ jobs:
           echo "----- context was created -----"
           docker-compose --context remote --verbose build
           echo "----- built with docker-compose -----"
-          docker-compose --context remote --verbose pull artipie
+          docker-compose --context remote pull artipie
           echo "----- pulled artipie -----"
           docker-compose --context=remote rm --stop -v --force -- central-auth
           echo "----- rm central-auth -----"
