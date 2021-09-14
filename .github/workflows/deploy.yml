@@ -12,5 +12,5 @@ jobs:
         run: |
           rsync -r /home/runner/myw/_work/central/central/* ${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }} -v
           echo "----- rsync passed successfully -----"
-          ssh -c "./restart.sh"
+          ssh -c "./restart.sh" ${{ secrets.REMOTE_HOST }}
           echo "----- successfully finished script -----"
