@@ -11,5 +11,6 @@ jobs:
           http_proxy: "http://localhost:3128"
         run: |
           rsync -r /home/runner/myw/_work/central/central/* ${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }} -v
+          echo "----- rsync passed successfully -----"
           ssh -c "./restart.sh"
           echo "----- successfully finished script -----"
