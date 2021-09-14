@@ -22,7 +22,13 @@ jobs:
           echo "----- pulled artipie -----"
           docker-compose --context remote --verbose stop
           echo "----- stopped running containers without removing them -----"
-          env COMPOSE_PARAMIKO_SSH=1 docker-compose --context remote --verbose down
-          echo "----- down successfully -----"
+          docker-compose --context=remote rm --stop -v --force -- central-auth
+          echo "----- rm central-auth -----"
+          docker-compose --context=remote rm --stop -v --force -- nginx
+          echo "----- rm nginx -----"
+          docker-compose --context=remote rm --stop -v --force -- certbot
+          echo "----- rm certbot -----"
+          docker-compose --context=remote rm --stop -v --force -- artipie
+          echo "----- rm artipie -----"
           docker-compose --context remote --verbose up -d
           echo "----- up in detached mode -----"
