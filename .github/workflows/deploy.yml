@@ -14,7 +14,7 @@ jobs:
           echo "----- rsync passed successfully -----"
           docker context rm remote -f
           echo "----- remove context 'remote' -----"
-          docker context create remote --docker "host=ssh://${{ secrets.REMOTE_HOST }}"
+          docker context create remote --docker "host=ssh://${{ secrets.REMOTE_HOST }}" --default-stack-orchestrator swarm
           echo "----- context was created -----"
           docker-compose --context remote --verbose build
           echo "----- built with docker-compose -----"
