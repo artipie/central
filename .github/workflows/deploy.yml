@@ -28,5 +28,3 @@ jobs:
           echo "----- rm certbot -----"
           docker-compose --context=remote rm --stop -v --force -- artipie
           echo "----- rm artipie -----"
-          env COMPOSE_PARAMIKO_SSH=1 docker-compose --context remote --verbose up -d
-          echo "----- up in detached mode -----"
