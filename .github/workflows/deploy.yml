@@ -20,8 +20,6 @@ jobs:
           echo "----- built with docker-compose -----"
           docker-compose --context remote --verbose pull artipie
           echo "----- pulled artipie -----"
-          service docker start
-          echo "----- service docker successfully started -----"
           env COMPOSE_PARAMIKO_SSH=1 docker-compose --context remote --verbose down
           echo "----- down successfully -----"
           docker-compose --context remote --verbose up -d
