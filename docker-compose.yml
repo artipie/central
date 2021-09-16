@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   artipie:
-    image: artipie/artipie:v0.21
+    image: artipie/artipie:v0.22
     container_name: artipie
     restart: unless-stopped
     environment:
@@ -25,7 +25,7 @@ services:
     networks:
       - artipie-net
   nginx:
-    image: nginx:1.21.3-alpine
+    image: nginx:1.17.10-alpine
     container_name: nginx
     depends_on:
       - artipie
