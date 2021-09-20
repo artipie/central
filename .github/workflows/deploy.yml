@@ -2,25 +2,13 @@ name: "Deploy Artipie"
 on: [push]
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted]
     environment: Prod
     steps:
       - uses: actions/checkout@v2.3.4
-      - run: echo ${{ secrets.TEST_SECRET }} | sed -e 's/\(.\)/\1 /g'
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.2.11
-        with:
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-          EXCLUDE: ".github/, .gitignore"
-      - name: Build, remove old container and up a new one
         env:
-          SSH_REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          SSH_REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          http_proxy: "http://localhost:3128"
         run: |
-          docker context create remote ‐‐docker "host=ssh://$SSH_REMOTE_USER"
-          docker context use remote
-          docker-compose build
-          docker-compose pull artipie
-          docker-compose down
-          docker-compose up -d
+          rsync -r $GITHUB_WORKSPACE/* ${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }} -v
+          ssh ${{ secrets.REMOTE_HOST }} "./restart.sh"
