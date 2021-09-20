@@ -10,7 +10,4 @@ jobs:
         env:
           http_proxy: "http://localhost:3128"
         run: |
-          rsync -r /home/runner/myw/_work/central/central/* ${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }} -v
-          echo "----- rsync passed successfully -----"
-          ssh ${{ secrets.REMOTE_HOST }} "./restart.sh"
-          echo "----- successfully finished script -----"
+          echo "$GITHUB_WORKSPACE"
