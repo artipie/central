@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   artipie:
-    image: artipie/artipie:v0.22
+    image: artipie/artipie:v0.23.1
     container_name: artipie
     restart: unless-stopped
     environment:
@@ -10,7 +10,16 @@ services:
       - ARTIPIE_SESSION_KEY
     volumes:
       - /var/artipie:/var/artipie
-      - /home/artipie/central/artipie.yml:/etc/artipie.yml
+      - ./artipie.yml:/etc/artipie.yml
+    networks:
+      - artipie-net
+  front:
+    image: artipie/front:v0.0.2
+    container_name: front
+    restart: unless-stopped
+    volumes:
+      - /var/artipie:/var/artipie
+      - ./artipie.yml:/etc/artipie.yml
     networks:
       - artipie-net
   central-auth:
@@ -34,10 +43,10 @@ services:
     networks:
       - artipie-net
     volumes:
-      - /home/artipie/central/www:/var/www
-      - /home/artipie/central/nginx.conf:/etc/nginx/nginx.conf
-      - /home/artipie/central/data/certbot/conf:/etc/letsencrypt
-      - /home/artipie/central/data/certbot/www:/var/www/certbot
+      - ./www:/var/www
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     ports:
       - "80:80"
       - "443:443"
