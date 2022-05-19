@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   artipie:
-    image: artipie/artipie:v0.23.1
+    image: artipie/artipie:v0.23.10
     container_name: artipie
     restart: unless-stopped
     environment:
@@ -14,7 +14,7 @@ services:
     networks:
       - artipie-net
   front:
-    image: artipie/front:v0.0.2
+    image: artipie/front:v0.0.3
     container_name: front
     restart: unless-stopped
     volumes:
