@@ -8,6 +8,7 @@ services:
       - ARTIPIE_USER_NAME
       - ARTIPIE_USER_PASS
       - ARTIPIE_SESSION_KEY
+      - TKN_KEY
     volumes:
       - /var/artipie:/var/artipie
       - ./artipie.yml:/etc/artipie.yml
@@ -22,6 +23,8 @@ services:
       - ./artipie.yml:/etc/artipie.yml
     networks:
       - artipie-net
+    environment:
+      - TKN_KEY
   central-auth:
     image: g4s8/artipie-auth:latest
     container_name: central-auth
