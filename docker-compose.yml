@@ -26,7 +26,9 @@ services:
     environment:
       - TKN_KEY
   central-auth:
-    image: g4s8/artipie-auth:latest
+    build:
+      context: ./login
+      dockerfile: Dockerfile
     container_name: central-auth
     environment:
       - OAUTH_CLIENT
