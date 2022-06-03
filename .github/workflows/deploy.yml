@@ -9,6 +9,11 @@ jobs:
       - name: Deploy to Server
         env:
           http_proxy: "http://localhost:3128"
+          REMOTE_TARGET: ${{secrets.REMOTE_TARGET}}
         run: |
-          rsync -r $GITHUB_WORKSPACE/* ${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }} -v
-          ssh ${{ secrets.REMOTE_HOST }} "./restart.sh"
+          env>/tmp/log.log
+          rsync -r -v $GITHUB_WORKSPACE/* "$REMOTE_TARGET"
+          cd "$REMOTE_TARGET"
+          ls -lah
+          ./restart.sh
+ 

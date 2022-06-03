@@ -1,20 +1,21 @@
 version: "3.3"
 services:
   artipie:
-    image: artipie/artipie:v0.23.1
+    image: artipie/artipie:v0.23.10
     container_name: artipie
     restart: unless-stopped
     environment:
       - ARTIPIE_USER_NAME
       - ARTIPIE_USER_PASS
       - ARTIPIE_SESSION_KEY
+      - TKN_KEY
     volumes:
       - /var/artipie:/var/artipie
       - ./artipie.yml:/etc/artipie.yml
     networks:
       - artipie-net
   front:
-    image: artipie/front:v0.0.2
+    image: artipie/front:v0.0.3
     container_name: front
     restart: unless-stopped
     volumes:
@@ -22,8 +23,12 @@ services:
       - ./artipie.yml:/etc/artipie.yml
     networks:
       - artipie-net
+    environment:
+      - TKN_KEY
   central-auth:
-    image: g4s8/artipie-auth:latest
+    build:
+      context: ./login
+      dockerfile: Dockerfile
     container_name: central-auth
     environment:
       - OAUTH_CLIENT
