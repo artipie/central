@@ -15,7 +15,7 @@ services:
     networks:
       - artipie-net
   front:
-    image: artipie/front:v0.0.4
+    image: artipie/front:v0.0.5
     container_name: front
     restart: unless-stopped
     volumes:
