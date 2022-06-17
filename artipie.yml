@@ -3,7 +3,9 @@ meta:
     type: fs
     path: /var/artipie/repo
   credentials:
-    - type: file
+    - 
+      type: file
       path: _credentials.yml
-    - type: github
+    - 
+      type: github
   layout: org
