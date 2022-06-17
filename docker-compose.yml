@@ -11,16 +11,16 @@ services:
       - TKN_KEY
     volumes:
       - /var/artipie:/var/artipie
-      - ./artipie.yml:/etc/artipie.yml
+      - ./artipie.yml:/etc/artipie/artipie.yml
     networks:
       - artipie-net
   front:
-    image: artipie/front:v0.0.3
+    image: artipie/front:v0.0.5
     container_name: front
     restart: unless-stopped
     volumes:
       - /var/artipie:/var/artipie
-      - ./artipie.yml:/etc/artipie.yml
+      - ./artipie.yml:/etc/artipie/artipie.yml
     networks:
       - artipie-net
     environment:
