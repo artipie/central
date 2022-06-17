@@ -11,7 +11,7 @@ services:
       - TKN_KEY
     volumes:
       - /var/artipie:/var/artipie
-      - ./artipie.yml:/etc/artipie.yml
+      - ./artipie.yml:/etc/artipie/artipie.yml
     networks:
       - artipie-net
   front:
