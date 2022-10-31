@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   artipie:
-    image: artipie/artipie:v0.27.3
+    image: artipie/artipie:v0.27.4
     container_name: artipie
     restart: unless-stopped
     environment:
@@ -15,16 +15,14 @@ services:
     networks:
       - artipie-net
   front:
-    image: artipie/front:v0.0.11
+    image: artipie/front:v0.1.0
     container_name: front
     restart: unless-stopped
-    volumes:
-      - /var/artipie:/var/artipie
-      - ./artipie.yml:/etc/artipie/artipie.yml
     networks:
       - artipie-net
     environment:
-      - TKN_KEY
+      - ARTIPIE_LAYOUT=org
+      - ARTIPIE_REST=http://artipie:8086
   central-auth:
     build:
       context: ./login
